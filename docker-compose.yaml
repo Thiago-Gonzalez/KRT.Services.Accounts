@@ -1,0 +1,58 @@
+services:
+  krt.services.accounts.api:
+    container_name: krt-services-accounts-api
+    build:
+      context: .
+      dockerfile: KRT.Services.Accounts.API/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+
+      ConnectionStrings__KRTAccountsDb: "Server=sqlserver,1433;Database=KRTAccountsDb;User Id=sa;Password=KRTDb@123;TrustServerCertificate=True"
+
+      RabbitMQ__Host: rabbitmq
+      RabbitMQ__Port: 5672
+      RabbitMQ__Username: guest
+      RabbitMQ__Password: guest
+    depends_on:
+      - sqlserver
+      - rabbitmq
+    networks:
+      - krt-network
+
+  sqlserver:
+    container_name: krt-sqlserver
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "KRTDb@123"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - krt-network
+
+  rabbitmq:
+    container_name: krt-rabbitmq
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - krt-network
+
+volumes:
+  sqlserver_data:
+  rabbitmq_data:
+
+networks:
+  krt-network:
+    driver: bridge

@@ -1,7 +1,13 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path=".dockerignore" />
     <File Path=".gitignore" />
+    <File Path="docker-compose.yaml" />
     <File Path="README.md" />
   </Folder>
   <Project Path="KRT.Services.Accounts.API/KRT.Services.Accounts.API.csproj" />
+  <Project Path="KRT.Services.Accounts.Application/KRT.Services.Accounts.Application.csproj" />
+  <Project Path="KRT.Services.Accounts.Core/KRT.Services.Accounts.Core.csproj" />
+  <Project Path="KRT.Services.Accounts.Infrastructure/KRT.Services.Accounts.Infrastructure.csproj" />
+  <Project Path="KRT.Services.Accounts.Tests/KRT.Services.Accounts.Tests.csproj" />
 </Solution>

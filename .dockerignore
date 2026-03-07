@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+
+# Visual Studio
+.vs
+.vscode
+
+# build artifacts
+bin/
+obj/
+
+# user files
+*.user
+*.suo
+
+# logs
+*.log
+
+# docker
+docker-compose*
+Dockerfile*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# env
+.env
+.env.*
+
+# test results
+TestResults/
+
+# README e documentação
+README.md
+*.md
