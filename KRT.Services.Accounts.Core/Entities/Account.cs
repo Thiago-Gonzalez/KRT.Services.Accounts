@@ -6,6 +6,11 @@ namespace KRT.Services.Accounts.Core.Entities;
 
 public class Account : AggregateRoot
 {
+    /// <summary>
+    /// Construtor default para configuração do EF Core.
+    /// </summary>
+    private Account() { }
+
     private Account(string holderName, string cpf)
     {
         Validate(holderName);
@@ -23,7 +28,7 @@ public class Account : AggregateRoot
     /// <summary>
     /// CPF do titular.
     /// </summary>
-    public Cpf Cpf { get; private set; }
+    public Cpf Cpf { get; private set; } = null!;
 
     /// <summary>
     /// Status da Conta.

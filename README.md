@@ -32,11 +32,11 @@ Exemplos de sistemas que poderiam consumir esses eventos:
 O projeto foi estruturado utilizando **Clean Architecture**, separando responsabilidades em diferentes camadas.
 
 ```
-KRT.Services.Customers.API
-KRT.Services.Customers.Application
-KRT.Services.Customers.Core
-KRT.Services.Customers.Infrastructure
-KRT.Services.Customers.Tests
+KRT.Services.Accounts.API
+KRT.Services.Accounts.Application
+KRT.Services.Accounts.Core
+KRT.Services.Accounts.Infrastructure
+KRT.Services.Accounts.Tests
 ```
 
 ### Camadas

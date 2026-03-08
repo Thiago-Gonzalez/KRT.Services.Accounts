@@ -29,7 +29,7 @@ services:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "KRTDb@123"
     ports:
-      - "1433:1433"
+      - "1434:1433"
     volumes:
       - sqlserver_data:/var/opt/mssql
     networks:
