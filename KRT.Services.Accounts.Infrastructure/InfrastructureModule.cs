@@ -1,4 +1,5 @@
 ﻿using KRT.Services.Accounts.Core.Repositories;
+using KRT.Services.Accounts.Infrastructure.CacheStorage;
 using KRT.Services.Accounts.Infrastructure.MessageBus;
 using KRT.Services.Accounts.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,8 @@ public static class InfrastructureModule
         services
             .AddDbContext(configuration)
             .AddRepositories()
-            .AddRabbitMQ();
+            .AddRabbitMQ()
+            .AddRedisCache(configuration);
 
         return services;
     }
@@ -73,6 +75,30 @@ public static class InfrastructureModule
 
         services.AddSingleton<IMessageBusClient, RabbitMQClient>();
         services.AddTransient<IEventProcessor, EventProcessor>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddRedisCache(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddSingleton(sp => {
+            var configuration = sp.GetService<IConfiguration>();
+            var options = new RedisOptions();
+
+            configuration!.GetSection("Redis").Bind(options);
+
+            return options;
+        });
+
+        var redisOptions = configuration.GetSection("Redis").Get<RedisOptions>() ?? throw new InvalidOperationException("Redis não configurado.");
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.InstanceName = redisOptions.InstanceName;
+            options.Configuration = redisOptions.Configuration;
+        });
+
+        services.AddTransient<ICacheService, CacheService>();
 
         return services;
     }

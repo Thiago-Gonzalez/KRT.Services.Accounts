@@ -16,9 +16,13 @@ services:
       RabbitMQ__Port: 5672
       RabbitMQ__Username: guest
       RabbitMQ__Password: guest
+
+      Redis__InstanceName: AccountsCache
+      Redis__Configuration: redis:6379
     depends_on:
       - sqlserver
       - rabbitmq
+      - redis
     networks:
       - krt-network
 
@@ -49,9 +53,20 @@ services:
     networks:
       - krt-network
 
+  redis:
+    container_name: krt-redis
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - krt-network
+
 volumes:
   sqlserver_data:
   rabbitmq_data:
+  redis_data:
 
 networks:
   krt-network:
