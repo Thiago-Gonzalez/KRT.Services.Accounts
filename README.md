@@ -100,7 +100,7 @@ docker compose version
 Na raiz do projeto execute:
 
 ```
-docker compose up -d
+docker compose up -d | docker compose up -d --build
 ```
 
 Esse comando irá:
@@ -160,10 +160,11 @@ Também é possível executar a aplicação diretamente via **.NET CLI** ou **Vi
 
 * .NET 8 SDK
 * SQL Server ou SQL Server Express
+* Redis
+* RabbitMQ
 
-Download do .NET:
-
-https://dotnet.microsoft.com/download
+⚠️ Atenção: As configurações no appsettings.json estão otimizadas para rodar com Docker (usando localhost para SQL Server, Redis e RabbitMQ). 
+Se você não estiver usando Docker, precisará atualizar essas configurações para apontar para os serviços instalados localmente na sua máquina.
 
 ---
 
