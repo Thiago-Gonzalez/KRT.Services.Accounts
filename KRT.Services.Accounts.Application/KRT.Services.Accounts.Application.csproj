@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KRT.Services.Accounts.Core\KRT.Services.Accounts.Core.csproj" />
+    <ProjectReference Include="..\KRT.Services.Accounts.Infrastructure\KRT.Services.Accounts.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
   </ItemGroup>
 
 </Project>
