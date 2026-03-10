@@ -33,11 +33,6 @@ public class GlobalExceptionHandler : IExceptionHandler
                 message = businessException.Message;
                 break;
 
-            case ArgumentException argumentException:
-                statusCode = StatusCodes.Status400BadRequest;
-                message = argumentException.Message;
-                break;
-
             default:
                 statusCode = StatusCodes.Status500InternalServerError;
                 message = _environment.IsDevelopment()

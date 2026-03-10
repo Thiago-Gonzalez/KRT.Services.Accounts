@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using KRT.Services.Accounts.Core.Exceptions;
+using System.Text.RegularExpressions;
 
 namespace KRT.Services.Accounts.Core.ValueObjects;
 
@@ -12,16 +13,16 @@ public sealed class Cpf
     /// Cria um CPF removendo formatações e verificando se o CPF é válido.
     /// </summary>
     /// <param name="value">CPF.</param>
-    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="BusinessRuleValidationException"></exception>
     public static Cpf Create(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentException("CPF é obrigatório.");
+            throw new BusinessRuleValidationException("CPF é obrigatório.");
 
         var cpf = RemoveFormatting(value);
 
         if (!IsValid(cpf))
-            throw new ArgumentException("CPF inválido.");
+            throw new BusinessRuleValidationException("CPF inválido.");
 
         return new Cpf(cpf);
     }

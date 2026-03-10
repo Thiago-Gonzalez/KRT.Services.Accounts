@@ -36,6 +36,6 @@ public class AddAccountHandler : IRequestHandler<AddAccountCommand, ResultViewMo
 
         await _cacheService.RemoveAsync(CacheKeys.AccountsList);
 
-        return ResultViewModel<int>.Success(account.Id);
+        return ResultViewModel<int>.Success(account.Id, 201);
     }
 }

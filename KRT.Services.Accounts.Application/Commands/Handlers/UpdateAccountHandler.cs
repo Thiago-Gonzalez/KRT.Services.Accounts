@@ -39,6 +39,6 @@ public class UpdateAccountHandler : IRequestHandler<UpdateAccountCommand, Result
         await _cacheService.RemoveAsync(CacheKeys.AccountById(request.Id));
         await _cacheService.RemoveAsync(CacheKeys.AccountsList);
 
-        return ResultViewModel<Unit>.Success(Unit.Value);
+        return ResultViewModel<Unit>.Success(Unit.Value, 204);
     }
 }

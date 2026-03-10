@@ -84,10 +84,10 @@ public class Account : AggregateRoot
     /// Valida as propriedades da Conta.
     /// </summary>
     /// <param name="holderName">Nome do titular.</param>
-    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="BusinessRuleValidationException"></exception>
     private static void Validate(string holderName)
     {
         if (string.IsNullOrWhiteSpace(holderName))
-            throw new ArgumentException("Nome do titular é obrigatório.", nameof(holderName));
+            throw new BusinessRuleValidationException("Nome do titular é obrigatório.");
     }
 }
