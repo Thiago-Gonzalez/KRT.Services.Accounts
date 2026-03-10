@@ -100,7 +100,7 @@ docker compose version
 Na raiz do projeto execute:
 
 ```
-docker compose up -d | docker compose up -d --build
+docker compose up -d --build | docker compose up -d
 ```
 
 Esse comando irá:
