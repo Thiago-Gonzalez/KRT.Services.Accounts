@@ -126,7 +126,7 @@ docker ps
 ### API
 
 ```
-http://localhost:5000
+http://localhost:5000/swagger
 ```
 
 ### RabbitMQ Management
