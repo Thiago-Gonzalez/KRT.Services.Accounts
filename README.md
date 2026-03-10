@@ -70,6 +70,7 @@ Contém testes automatizados da aplicação.
 * **Entity Framework Core**
 * **SQL Server**
 * **RabbitMQ**
+* **Redis**
 * **Docker**
 * **Docker Compose**
 

@@ -28,6 +28,10 @@ public class RabbitMQClient : IMessageBusClient
 
         await channel.ExchangeDeclareAsync(exchange, ExchangeType.Topic, true);
 
+        var queue = $"{routingKey}-queue";
+        await channel.QueueDeclareAsync(queue, true, false, false);
+        await channel.QueueBindAsync(queue, exchange, routingKey);
+
         await channel.BasicPublishAsync(exchange, routingKey, true, body);
     }
 }

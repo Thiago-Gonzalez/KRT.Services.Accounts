@@ -2,10 +2,10 @@
 using KRT.Services.Accounts.Infrastructure.CacheStorage;
 using KRT.Services.Accounts.Infrastructure.MessageBus;
 using KRT.Services.Accounts.Infrastructure.Persistence;
+using KRT.Services.Accounts.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 namespace KRT.Services.Accounts.Infrastructure;
@@ -23,7 +23,7 @@ public static class InfrastructureModule
         return services;
     }
 
-    public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("KRTAccountsDb");
 
@@ -38,14 +38,14 @@ public static class InfrastructureModule
         return services;
     }
 
-    public static IServiceCollection AddRepositories(this IServiceCollection services)
+    private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
-        services.AddScoped<IAccountRepository, IAccountRepository>();
+        services.AddScoped<IAccountRepository, AccountRepository>();
 
         return services;
     }
 
-    public static IServiceCollection AddRabbitMQ(this IServiceCollection services)
+    private static IServiceCollection AddRabbitMQ(this IServiceCollection services)
     {
         services.AddSingleton(sp => {
             var configuration = sp.GetService<IConfiguration>();
@@ -58,7 +58,7 @@ public static class InfrastructureModule
 
         services.AddSingleton(sp =>
         {
-            var options = sp.GetRequiredService<IOptions<RabbitMQOptions>>().Value;
+            var options = sp.GetRequiredService<RabbitMQOptions>();
 
             var connectionFactory = new ConnectionFactory
             {
@@ -79,7 +79,7 @@ public static class InfrastructureModule
         return services;
     }
 
-    public static IServiceCollection AddRedisCache(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddRedisCache(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton(sp => {
             var configuration = sp.GetService<IConfiguration>();

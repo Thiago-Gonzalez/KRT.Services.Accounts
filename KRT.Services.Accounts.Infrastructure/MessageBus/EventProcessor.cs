@@ -23,7 +23,7 @@ public class EventProcessor : IEventProcessor
 
     public string ToDashCase(string text)
     {
-        if (text == null) throw new ArgumentNullException(nameof(text));
+        if (text is null) throw new ArgumentNullException(nameof(text));
 
         if (text.Length < 2)
             return text;

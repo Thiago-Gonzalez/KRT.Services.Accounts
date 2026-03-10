@@ -1,5 +1,6 @@
 ﻿using KRT.Services.Accounts.Core.Enums;
 using KRT.Services.Accounts.Core.Events;
+using KRT.Services.Accounts.Core.Exceptions;
 using KRT.Services.Accounts.Core.ValueObjects;
 
 namespace KRT.Services.Accounts.Core.Entities;
@@ -57,7 +58,7 @@ public class Account : AggregateRoot
     public void Update(string holderName, string cpf)
     {
         if (Status == AccountStatusEnum.Inactive)
-            throw new InvalidOperationException("Contas inativas não podem ser atualizadas.");
+            throw new BusinessRuleValidationException("Contas inativas não podem ser atualizadas.");
 
         Validate(holderName);
 

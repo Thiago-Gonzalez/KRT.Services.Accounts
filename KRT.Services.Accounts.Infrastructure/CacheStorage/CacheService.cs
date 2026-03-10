@@ -22,6 +22,8 @@ public class CacheService : ICacheService
         return JsonSerializer.Deserialize<T>(objectString);
     }
 
+    public async Task RemoveAsync(string key) => await _cache.RemoveAsync(key);
+
     public async Task SetAsync<T>(string key, T data)
     {
         var memoryCacheEntryOptions = new DistributedCacheEntryOptions

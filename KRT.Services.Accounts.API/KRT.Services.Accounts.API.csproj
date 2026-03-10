@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\KRT.Services.Accounts.Application\KRT.Services.Accounts.Application.csproj" />
     <ProjectReference Include="..\KRT.Services.Accounts.Core\KRT.Services.Accounts.Core.csproj" />
     <ProjectReference Include="..\KRT.Services.Accounts.Infrastructure\KRT.Services.Accounts.Infrastructure.csproj" />

@@ -1,6 +1,7 @@
 ﻿using KRT.Services.Accounts.Core.Entities;
 using KRT.Services.Accounts.Core.Exceptions;
 using KRT.Services.Accounts.Core.Repositories;
+using KRT.Services.Accounts.Core.ValueObjects;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,11 @@ public class AccountRepository : IAccountRepository
         _context = context;
     }
 
-    public async Task<bool> ExistsByCpfAsync(string cpf) => await _context.Accounts .IgnoreQueryFilters().AnyAsync(a => a.Cpf.Value == cpf);
+    public async Task<bool> ExistsByCpfAsync(string cpf)
+    {
+        var cpfValueObject = Cpf.Create(cpf);
+        return await _context.Accounts.IgnoreQueryFilters().AnyAsync(a => a.Cpf == cpfValueObject);
+    }
 
     public async Task AddAsync(Account account)
     {
